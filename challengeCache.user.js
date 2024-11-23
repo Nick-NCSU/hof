@@ -42,6 +42,7 @@ function loadNotes() {
     injectNotesElement();
 
     const notes = document.getElementById('challengeNotes');
+    if(!notes) return;
 
     const challenge = window.location.pathname.split('/').pop();
 
