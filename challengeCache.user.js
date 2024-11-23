@@ -32,10 +32,10 @@ function loadStartDatePicker() {
 }
 
 function injectNotesElement() {
-    const startDatePicker = document.getElementsByClassName('startDatePicker')[0];
-    if(!startDatePicker) return;
+    const toggleExtraData = document.getElementsByClassName('toggleExtraData')[0];
+    if(!toggleExtraData) return;
 
-    startDatePicker.insertAdjacentHTML('afterend', '<br><textarea id="challengeNotes" rows=4 cols=50 style="color: black;"/>');
+    toggleExtraData.insertAdjacentHTML('afterend', '<br><textarea id="challengeNotes" rows=4 cols=50 style="color: black;"/>');
 }
 
 function loadNotes() {
