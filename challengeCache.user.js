@@ -35,7 +35,7 @@ function injectNotesElement() {
     const toggleExtraData = document.getElementsByClassName('toggleExtraData')[0];
     if(!toggleExtraData) return;
 
-    toggleExtraData.insertAdjacentHTML('afterend', '<br><textarea id="challengeNotes" rows=4 cols=50 style="color: black;"/>');
+    toggleExtraData.insertAdjacentHTML('afterend', '<p>Notes:</p><textarea id="challengeNotes" rows=4 cols=50 style="color: black;"/>');
 }
 
 function loadNotes() {
