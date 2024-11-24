@@ -6,11 +6,17 @@
 // @author       Nick-NCSU
 // @match        https://anime.jhiday.net/hof/challenge/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=jhiday.net
-// @grant        none
-// @run-at document-end
+// @grant        GM_addStyle
+// @run-at       document-end
 // @downloadURL  https://github.com/Nick-NCSU/hof/raw/main/src/challengeMissingHelper.user.js
 // @updateURL    https://github.com/Nick-NCSU/hof/raw/main/src/challengeMissingHelper.user.js
 // ==/UserScript==
+
+GM_addStyle('.modal-group-userscript { flex: 1; margin-right: 1rem; }');
+GM_addStyle('.modal-group-userscript > textarea { width: 100%; }');
+GM_addStyle('.modal-label-userscript { display: block; margin-right: 0.5rem; }');
+GM_addStyle('.modal-body { display: flex; margin: 0 auto; justify-content: space-between; }');
+GM_addStyle('#exportModal > .modal-dialog { width: 90%; }');
 
 const exportContents = document.querySelector('#exportModal #exportContents');
 
@@ -28,11 +34,23 @@ Object.assign(missingContents, {
     readOnly: 'true'
 });
 
-exportContents.insertAdjacentHTML('beforebegin', '<p>Input:</p>');
-exportContents.insertAdjacentElement('beforebegin', inputContents);
-exportContents.insertAdjacentHTML('beforebegin', '<p>Missing:</p>');
-exportContents.insertAdjacentElement('beforebegin', missingContents);
-exportContents.insertAdjacentHTML('beforebegin', '<p>Export:</p>');
+const inputContentsDiv = document.createElement('div');
+inputContentsDiv.className = 'modal-group-userscript';
+inputContentsDiv.insertAdjacentHTML('afterbegin', '<label for="inputContents" class="modal-label-userscript">Input:</label>');
+inputContentsDiv.insertAdjacentElement('beforeend', inputContents);
+exportContents.parentNode.insertBefore(inputContentsDiv, exportContents);
+
+const missingContentsDiv = document.createElement('div');
+missingContentsDiv.className = 'modal-group-userscript';
+missingContentsDiv.insertAdjacentHTML('afterbegin', '<label for="missingContents" class="modal-label-userscript">Missing:</label>');
+missingContentsDiv.insertAdjacentElement('beforeend', missingContents);
+exportContents.parentNode.insertBefore(missingContentsDiv, exportContents);
+
+const exportContentsDiv = document.createElement('div');
+exportContentsDiv.className = 'modal-group-userscript';
+exportContentsDiv.insertAdjacentHTML('afterbegin', '<label for="exportContents" class="modal-label-userscript">Export:</label>');
+exportContents.parentNode.insertBefore(exportContentsDiv, exportContents);
+exportContentsDiv.appendChild(exportContents);
 
 // Observer is needed due to no events being sent
 // by jquery when the export is filled
